@@ -62,16 +62,16 @@ How to instal kubernetes multimaster Ubuntu 20.04 LTS
 - modprobe br_netfilter
 
 ## set config layer file system
-- tee /etc/modules-load.d/k8s.conf <<EOF
-  overlay
-  br_netfilter
+- tee /etc/modules-load.d/k8s.conf <<EOF<br/>
+  overlay<br/>
+  br_netfilter<br/>
   EOF
 
 ## set config bridge network k8s
-- tee /etc/sysctl.d/kubernetes.conf<<EOF
-  net.bridge.bridge-nf-call-ip6tables = 1
-  net.bridge.bridge-nf-call-iptables = 1
-  net.ipv4.ip_forward = 1
+- tee /etc/sysctl.d/kubernetes.conf<<EOF<br/>
+  net.bridge.bridge-nf-call-ip6tables = 1<br/>
+  net.bridge.bridge-nf-call-iptables = 1<br/>
+  net.ipv4.ip_forward = 1<br/>
   EOF
 
 ## apply system bridge
