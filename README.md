@@ -100,6 +100,26 @@ How to instal kubernetes multimaster Ubuntu 20.04 LTS
 - systemctl status containerd
 
 
+### Initial Master ####
+
+# pull kubernetes image
+- kubeadm config images pull
+
+# check preflight
+- kubeadm init phase preflight
+
+# Init Multi Master 
+- kubeadm init --control-plane-endpoint="{ip LB master}:6443" --upload-certs --pod-network-cidr=192.168.0.0/16 --service-cidr=172.16.0.0/16
+# add kubeconfig admin 
+- mkdir -p $HOME/.kube
+- sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+- sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+
+
+
+
+
 
 
 
