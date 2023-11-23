@@ -54,12 +54,13 @@ Jika preserve_hostname diatur sebagai false, maka sistem dapat mengganti hostnam
 - apt-mark hold kubelet kubeadm kubectl
 
 ### System linux configuration ###
+## comment swap in fstab
+- nano /etc/fstab<br/>
+  swap bla bla
 ## set off swap
 - swapoff -a 
 - mount -a
-## comment swap in fstab
-- nano /etc/fstab
-  swap bla bla
+
   
 ## set layer file system
 - modprobe overlay
