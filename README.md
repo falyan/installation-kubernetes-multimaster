@@ -5,7 +5,7 @@ How to instal kubernetes multimaster Ubuntu 20.04 LTS
 - sudo -i
 
 ## set preverse Hostname
-- nano /etc/cloud/cloud.cfg
+- nano /etc/cloud/cloud.cfg<br/>
   preserve_hostname : true
 
 ## Setup Hostname 
@@ -19,11 +19,11 @@ How to instal kubernetes multimaster Ubuntu 20.04 LTS
 - timedatectl set-timezone Asia/Jakarta
 
 ## set Domain Local
-- nano /etc/hosts/
-  10.1.x.x {hostname-local}
-  10.1.x.x {hostname-local}
-  10.1.x.x {hostname-local}
-  10.1.x.x {hostname-local}
+- nano /etc/hosts/<br/>
+  10.1.x.x {hostname-local}<br/>
+  10.1.x.x {hostname-local}<br/>
+  10.1.x.x {hostname-local}<br/>
+  10.1.x.x {hostname-local}<br/>
 
 ## update repository
 - apt update
