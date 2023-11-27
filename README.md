@@ -1,4 +1,4 @@
-##### INSTALLATION KUBERNETES MULTIMASTER #####
+#### INSTALLATION KUBERNETES MULTIMASTER ####
 How to instal kubernetes multimaster Ubuntu 20.04 LTS
 
 ## Login to root
