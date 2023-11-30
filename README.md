@@ -1,7 +1,7 @@
 # INSTALASI KUBERNETES MULTI MASTER
 instal kubernetes multimaster Ubuntu 20.04 LTS
 
-## ARSITEKTUR (TOPOLOGI)
+# ARSITEKTUR (TOPOLOGI)
 
 ![Alt text](image.png)
 
@@ -17,7 +17,7 @@ nano /etc/cloud/cloud.cfg
 search **preserve_hostname** and set *true*</br></br>
 preserve_hostname : true
 
-## Set the hostname and adjust it to the required hostname (do all node)
+## set the hostname and adjust it to the required hostname (do all node)
 ```bash
 hostnamectl set-hostname {hostname}
 ```
@@ -31,11 +31,11 @@ hostnamectl set-hostname {hostname}
 | `worker-02` | `10.10.90.56` | Worker                                     |
 | `worker-03` | `10.10.90.57` | Worker                                     |
 
-## Set time (do all node)
+## set time (do all node)
 ```bash
 timedatectl set-timezone Asia/Jakarta
 ```
-## set Domain Local (do all node)
+## set domain local (do all node)
 ```bash
 nano /etc/hosts
 
@@ -48,7 +48,7 @@ nano /etc/hosts
   10.10.90.57 worker-03
 ```
 
-# K8S Installation (Do all Master and worker)
+# K8S INSTALLATION (DO ALL MASTER AND WORKER)
 
 ## update repository
 ```bash
@@ -136,7 +136,7 @@ EOF
 ```bash
 sysctl --system
 ```
-# Install Containerd (do all master and worker)
+# INSTALLATION CONTAINERD (DO ALL MASTER AND WORKER)
 ## add denpedencies and install ca certificate
 ```bash
 apt install -y gnupg2 software-properties-common ca-certificates
@@ -165,7 +165,7 @@ systemctl enable containerd
 systemctl status containerd
 ```
 
-# Initial Master (control plane)
+# INITIAL MASTER (CONTROL PLANE)
 
 ## pull kubernetes image
 ```bash
@@ -177,7 +177,7 @@ kubeadm init phase preflight
 ```
 ## Init Multi Master (only do in one Master node recommend on master-01)
 ```bash
-kubeadm init --control-plane-endpoint="lb-master:6443" --upload-certs --pod-network-cidr=192.168.0.0/16 --service-cidr=172.16.0.0/16
+kubeadm init --control-plane-endpoint="lb-master:6443" --upload-certs --pod-network-cidr=172.16.0.0/16
 ```
 ```bash
 Result 
@@ -213,7 +213,7 @@ Then you can join any number of worker nodes by running the following on each as
 kubeadm join lb-master:6443 --token qm8e6s.fg21m2eijz2yuybi \
         --discovery-token-ca-cert-hash sha256:06ff052ecf66ff5953793daa7625e1ae59352528e2ca72813d4e4e724234a7ea
 ```
-# add kubeconfig admin 
+## add kubeconfig admin 
 ```bash
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
