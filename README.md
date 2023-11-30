@@ -175,7 +175,7 @@ kubeadm config images pull
 ```bash
 kubeadm init phase preflight
 ```
-## Init Multi Master (only do in one Master node recommend on master-01)
+## Init Master (only do in one Master node recommend on master-01)
 ```bash
 kubeadm init --control-plane-endpoint="lb-master:6443" --upload-certs --pod-network-cidr=172.16.0.0/16
 ```
@@ -220,6 +220,29 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 check node by *kubectl get node*
+
+# INITIAL ANOTHER MASTER (do in master-02 and master-03)
+## pull kubernetes image
+```bash
+kubeadm config images pull
+```
+## check preflight
+```bash
+kubeadm init phase preflight
+```
+## Init MultiMaster
+```bash
+kubeadm join lb-master:6443 --token qm8e6s.fg21m2eijz2yuybi \
+        --discovery-token-ca-cert-hash sha256:06ff052ecf66ff5953793daa7625e1ae59352528e2ca72813d4e4e724234a7ea \
+        --control-plane --certificate-key 60909e661e90bbb71004df24462d93dc869f3b493c119166e5e4921fc37e5356
+```
+## add kubeconfig admin 
+```bash
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+
 
 
 
