@@ -75,7 +75,7 @@ apt update
 ```bash
 apt install -y kubeadm=1.25.0-00 kubelet=1.25.0-00 kubectl=1.25.0-00 
 ```
-## Hold all service to keep version 
+## hold all service to keep version 
 ```bash
 apt-mark hold kubelet kubeadm kubectl
 ```
@@ -175,7 +175,7 @@ kubeadm config images pull
 ```bash
 kubeadm init phase preflight
 ```
-## Init Master (only do in one Master node recommend on master-01)
+## init Master (only do in one Master node recommend on master-01)
 ```bash
 kubeadm init --control-plane-endpoint="lb-master:6443" --upload-certs --pod-network-cidr=172.16.0.0/16
 ```
@@ -230,7 +230,7 @@ kubeadm config images pull
 ```bash
 kubeadm init phase preflight
 ```
-## Init Multimaster (do in master-02 and master-03)
+## init Multimaster (do in master-02 and master-03)
 ```bash
 kubeadm join lb-master:6443 --token qm8e6s.fg21m2eijz2yuybi \
         --discovery-token-ca-cert-hash sha256:06ff052ecf66ff5953793daa7625e1ae59352528e2ca72813d4e4e724234a7ea \
