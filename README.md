@@ -250,7 +250,8 @@ kubeadm join lb-master:6443 --token qm8e6s.fg21m2eijz2yuybi \
         --discovery-token-ca-cert-hash sha256:06ff052ecf66ff5953793daa7625e1ae59352528e2ca72813d4e4e724234a7ea
 ```
 
-And then you need to install Network Policy to connect the pods each other link install 
+And then you need to install Network Policy to connect the pods each other link install below
+*https://github.com/falyan/install-calico*
 
 ## 🔗 Links
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/falyan-zuril-587585247/)
