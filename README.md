@@ -14,6 +14,7 @@ Jika preserve_hostname diatur sebagai false, maka sistem dapat mengganti hostnam
 ```bash
 nano /etc/cloud/cloud.cfg
 ```
+search **preserve_hostname** and set *true*</br>
 preserve_hostname : true
 
 ## Set the hostname and adjust it to the required hostname (do all node)
