@@ -46,7 +46,7 @@ nano /etc/hosts
   10.10.90.56 worker-02<br/>
   10.10.90.57 worker-03<br/>
 
-# K8s Installation (Do all Master and worker except Load Balancer)
+# K8s Installation (Do all Master and worker)
 
 ## update repository
 ```bash
@@ -116,43 +116,52 @@ modprobe br_netfilter
 ```
 ## set config layer file system
 ```bash
-tee /etc/modules-load.d/k8s.conf <<EOF<br/>
-overlay<br/>
-br_netfilter<br/>
+tee /etc/modules-load.d/k8s.conf <<EOF
+overlay
+br_netfilter
 EOF
 ```
 ## set config bridge network k8s
-- tee /etc/sysctl.d/kubernetes.conf<<EOF<br/>
-  net.bridge.bridge-nf-call-ip6tables = 1<br/>
-  net.bridge.bridge-nf-call-iptables = 1<br/>
-  net.ipv4.ip_forward = 1<br/>
-  EOF
+```bash
+tee /etc/sysctl.d/kubernetes.conf<<EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+EOF
+```
 
-## apply system bridge
-- sysctl --system
-
-### Install Containerd ###
+## apply system bridge and layer
+```bash
+sysctl --system
+```
+# Install Containerd (do all master and worker)
 ## add denpedencies and install ca certificate
-- apt install -y gnupg2 software-properties-common ca-certificates
-
+```bash
+apt install -y gnupg2 software-properties-common ca-certificates
+```
 ## add official repository
-- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-- add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-
+```bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+```
 ## install containerd
-- apt install -y containerd.io
-
+```bash
+apt install -y containerd.io
+```
 ## make directory config
-- mkdir -p /etc/containerd
-
+```bash
+mkdir -p /etc/containerd
+```
 ## add config default containerd
-- containerd config default > /etc/containerd/config.toml
-
+```bash
+containerd config default > /etc/containerd/config.toml
+```
 ## restart and enable service containerd
-- systemctl restart containerd
-- systemctl enable containerd
-- systemctl status containerd
-
+```bash
+systemctl restart containerd
+systemctl enable containerd
+systemctl status containerd
+```
 
 ### Initial Master ####
 
