@@ -9,7 +9,7 @@ How to instal kubernetes multimaster Ubuntu 20.04 LTS
 
 ## Login to root
 ```bash
-- sudo -i
+ sudo -i
 ```
 
 ## set preverse Hostname (Change Hostname VM)
@@ -18,13 +18,15 @@ How to instal kubernetes multimaster Ubuntu 20.04 LTS
 Ketika **preserve_hostname** diatur sebagai true, itu berarti sistem akan mempertahankan hostname yang sudah ditetapkan secara manual atau yang diberikan selama proses konfigurasi. Dengan kata lain, meskipun ada konfigurasi atau otomatisasi yang mencoba mengubah hostname selama proses boot, sistem akan mempertahankan nilai hostname yang sudah ada.
 
 Jika preserve_hostname diatur sebagai false, maka sistem dapat mengganti hostname selama proses boot jika ada konfigurasi atau skrip yang mencoba mengatur hostname baru.
+```bash
+nano /etc/cloud/cloud.cfg
+```
+preserve_hostname : true
 
-- nano /etc/cloud/cloud.cfg<br/>
-  preserve_hostname : true
-
-## Setup Hostname 
-- hostnamectl set-hostname {hostname}
-
+## Set the hostname and adjust it to the required hostname
+```bash
+hostnamectl set-hostname {hostname}
+```
 | Hostname       | Ip            | Description                                |
 | :--------   | :-------      | :----------------------------------------- |
 | `Lb-master` | `10.10.90.51` | Load balance for kube api-server port 6443 |
