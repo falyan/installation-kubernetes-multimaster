@@ -50,7 +50,7 @@ nano /etc/hosts
 
 ## update repository
 ```bash
- apt update
+apt update
 ```
 ## install https Transport
 ```bash
@@ -61,23 +61,45 @@ apt install curl apt-transport-https -y
 curl -fsSL  https://packages.cloud.google.com/apt/doc/apt-key.gpg|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/k8s.gpg
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 ```
-## add repository k8s to source llist ubuntu
-- echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-
-## update repository
-- apt update
-
+## add repository k8s to source list ubuntu
+```bash
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+```
+## update repository just added
+```bash
+apt update
+```
 ## instal kubectl kubeadm kubelet spceific version (v1.25)
-- apt install -y kubeadm=1.25.0-00 kubelet=1.25.0-00 kubectl=1.25.0-00 
-
-## Hold all service 
-- apt-mark hold kubelet kubeadm kubectl
-
+```bash
+apt install -y kubeadm=1.25.0-00 kubelet=1.25.0-00 kubectl=1.25.0-00 
+```
+## Hold all service to keep version 
+```bash
+apt-mark hold kubelet kubeadm kubectl
+```
 ### System linux configuration ###
 ## comment swap in fstab
-- nano /etc/fstab<br/>
-  swap bla bla
+```bash
+nano /etc/fstab
+``` 
+comment swap.img
+ 
+````bash
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/ubuntu-vg/ubuntu-lv during curtin installation
+/dev/disk/by-id/dm-uuid-LVM-97dj8w1JiawUrjPxBSMmOPPQAcxCp0Unxd76ijKb4JTNISA31NTokVogkj9nr9uZ / ext4 defaults 0 1
+# /boot was on /dev/sda2 during curtin installation
+/dev/disk/by-uuid/20b8e0ca-52b3-44dd-bcec-26609d5746d1 /boot ext4 defaults 0 1
+#/swap.img      none    swap    sw      0       0
+
 ## set off swap
+```
 - swapoff -a 
 - mount -a
 
