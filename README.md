@@ -5,14 +5,7 @@ instal kubernetes multimaster Ubuntu 20.04 LTS
 
 ![Alt text](image.png)
 
-# Do in all Node
-
-## Login to root
-```bash
- sudo -i
-```
-
-## set preverse hostname (Change Hostname VM)
+## set preverse hostname (do all node)
 **preserve_hostname** adalah opsi atau pengaturan yang digunakan dalam konfigurasi beberapa distribusi Linux, terutama dalam file konfigurasi **/etc/cloud/cloud.cfg**. Pengaturan ini dapat memiliki nilai true atau false dan mempengaruhi cara hostname sistem dihandle selama proses boot atau provisioning.
 
 Ketika **preserve_hostname** diatur sebagai true, itu berarti sistem akan mempertahankan hostname yang sudah ditetapkan secara manual atau yang diberikan selama proses konfigurasi. Dengan kata lain, meskipun ada konfigurasi atau otomatisasi yang mencoba mengubah hostname selama proses boot, sistem akan mempertahankan nilai hostname yang sudah ada.
@@ -23,11 +16,11 @@ nano /etc/cloud/cloud.cfg
 ```
 preserve_hostname : true
 
-## Set the hostname and adjust it to the required hostname
+## Set the hostname and adjust it to the required hostname (do all node)
 ```bash
 hostnamectl set-hostname {hostname}
 ```
-| Hostname    | Ip            | Description                                |
+| HOSTNAME    | IP            | KETERANGAN                               |
 | :--------   | :-------      | :----------------------------------------- |
 | `lb-master` | `10.10.90.51` | Load balance for kube api-server port 6443 |
 | `master-01` | `10.10.90.52` | Controle plane                             |
@@ -37,11 +30,11 @@ hostnamectl set-hostname {hostname}
 | `worker-02` | `10.10.90.56` | Worker                                     |
 | `worker-03` | `10.10.90.57` | Worker                                     |
 
-## Set time
+## Set time (do all node)
 ```bash
 timedatectl set-timezone Asia/Jakarta
 ```
-## set Domain Local
+## set Domain Local (do all node)
 ```bash
 nano /etc/hosts
 ```
@@ -49,20 +42,25 @@ nano /etc/hosts
   10.10.90.52 master-01<br/>
   10.10.90.53 master-02<br/>
   10.10.90.54 master-03<br/>
-  10.10.90.52 worker-01<br/>
-  10.10.90.53 worker-02<br/>
-  10.10.90.54 worker-03<br/>
+  10.10.90.55 worker-01<br/>
+  10.10.90.56 worker-02<br/>
+  10.10.90.57 worker-03<br/>
+
+# K8s Installation (Do all Master and worker except Load Balancer)
 
 ## update repository
-- apt update
-
+```bash
+ apt update
+```
 ## install https Transport
-- apt install curl apt-transport-https -y
-
+```bash
+apt install curl apt-transport-https -y
+```
 ## add api-key official k8s from google
-- curl -fsSL  https://packages.cloud.google.com/apt/doc/apt-key.gpg|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/k8s.gpg
-- curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-
+```bash
+curl -fsSL  https://packages.cloud.google.com/apt/doc/apt-key.gpg|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/k8s.gpg
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+```
 ## add repository k8s to source llist ubuntu
 - echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
