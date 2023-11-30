@@ -13,6 +13,8 @@ How to instal kubernetes multimaster Ubuntu 20.04 LTS
 | `Worker-02` | `10.10.90.56` | Worker                                     |
 | `Worker-03` | `10.10.90.57` | Worker                                     |
 
+![Alt text](image.png)
+
 
 ## Login to root
 - sudo -i
