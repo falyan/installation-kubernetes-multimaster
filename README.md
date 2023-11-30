@@ -3,15 +3,15 @@ How to instal kubernetes multimaster Ubuntu 20.04 LTS
 
 ## ARCHITECTURE (TOPOLOGI)
 
-| Node        | Ip            | Description                |
-| :--------   | :-------      | :------------------------- |
-| `LB-Master` | `10.10.90.51` | **Required**. Your API key |
-| `Master-01` | `10.10.90.51` | **Required**. Your API key |
-| `Master-02` | `10.10.90.51` | **Required**. Your API key |
-| `Master-03` | `10.10.90.51` | **Required**. Your API key |
-| `Worker-01` | `10.10.90.51` | **Required**. Your API key |
-| `Worker-02` | `10.10.90.51` | **Required**. Your API key |
-| `Worker-03` | `10.10.90.51` | **Required**. Your API key |
+| Node        | Ip            | Description                                |
+| :--------   | :-------      | :----------------------------------------- |
+| `LB-Master` | `10.10.90.51` | Load balance for kube api-server port 6443 |
+| `Master-01` | `10.10.90.52` | Controle plane                             |
+| `Master-02` | `10.10.90.53` | Controle plane                             |
+| `Master-03` | `10.10.90.54` | Controle plane                             |
+| `Worker-01` | `10.10.90.55` | Worker                                     |
+| `Worker-02` | `10.10.90.56` | Worker                                     |
+| `Worker-03` | `10.10.90.57` | Worker                                     |
 
 
 ## Login to root
