@@ -48,7 +48,7 @@ nano /etc/hosts
   10.10.90.57 worker-03
 ```
 
-# K8s Installation (Do all Master and worker)
+# K8S Installation (Do all Master and worker)
 
 ## update repository
 ```bash
@@ -165,21 +165,60 @@ systemctl enable containerd
 systemctl status containerd
 ```
 
-### Initial Master ####
+# Initial Master (control plane)
 
-# pull kubernetes image
-- kubeadm config images pull
+## pull kubernetes image
+```bash
+kubeadm config images pull
+```
+## check preflight
+```bash
+kubeadm init phase preflight
+```
+## Init Multi Master (only do in one Master node recommend on master-01)
+```bash
+kubeadm init --control-plane-endpoint="{ip LB master}:6443" --upload-certs --pod-network-cidr=192.168.0.0/16 --service-cidr=172.16.0.0/16
+```
+```bash
+Result 
 
-# check preflight
-- kubeadm init phase preflight
+Your Kubernetes control-plane has initialized successfully!
 
-# Init Multi Master 
-- kubeadm init --control-plane-endpoint="{ip LB master}:6443" --upload-certs --pod-network-cidr=192.168.0.0/16 --service-cidr=172.16.0.0/16
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+You can now join any number of the control-plane node running the following command on each as root:
+
+  kubeadm join payserv-lb-poc:6443 --token qm8e6s.fg21m2eijz2yuybi \
+        --discovery-token-ca-cert-hash sha256:06ff052ecf66ff5953793daa7625e1ae59352528e2ca72813d4e4e724234a7ea \
+        --control-plane --certificate-key 60909e661e90bbb71004df24462d93dc869f3b493c119166e5e4921fc37e5356
+
+Please note that the certificate-key gives access to cluster sensitive data, keep it secret!
+As a safeguard, uploaded-certs will be deleted in two hours; If necessary, you can use
+"kubeadm init phase upload-certs --upload-certs" to reload certs afterward.
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join payserv-lb-poc:6443 --token qm8e6s.fg21m2eijz2yuybi \
+        --discovery-token-ca-cert-hash sha256:06ff052ecf66ff5953793daa7625e1ae59352528e2ca72813d4e4e724234a7ea
+```
 # add kubeconfig admin 
-- mkdir -p $HOME/.kube
-- sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-- sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
+```bash
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
 
 
 
