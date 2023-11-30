@@ -14,7 +14,7 @@ Jika preserve_hostname diatur sebagai false, maka sistem dapat mengganti hostnam
 ```bash
 nano /etc/cloud/cloud.cfg
 ```
-search **preserve_hostname** and set *true*</br>
+search **preserve_hostname** and set *true*</br></br>
 preserve_hostname : true
 
 ## Set the hostname and adjust it to the required hostname (do all node)
@@ -177,7 +177,7 @@ kubeadm init phase preflight
 ```
 ## Init Multi Master (only do in one Master node recommend on master-01)
 ```bash
-kubeadm init --control-plane-endpoint="{ip LB master}:6443" --upload-certs --pod-network-cidr=192.168.0.0/16 --service-cidr=172.16.0.0/16
+kubeadm init --control-plane-endpoint="lb-master:6443" --upload-certs --pod-network-cidr=192.168.0.0/16 --service-cidr=172.16.0.0/16
 ```
 ```bash
 Result 
@@ -200,7 +200,7 @@ Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
 
 You can now join any number of the control-plane node running the following command on each as root:
 
-  kubeadm join payserv-lb-poc:6443 --token qm8e6s.fg21m2eijz2yuybi \
+  kubeadm join lb-master:6443 --token qm8e6s.fg21m2eijz2yuybi \
         --discovery-token-ca-cert-hash sha256:06ff052ecf66ff5953793daa7625e1ae59352528e2ca72813d4e4e724234a7ea \
         --control-plane --certificate-key 60909e661e90bbb71004df24462d93dc869f3b493c119166e5e4921fc37e5356
 
@@ -210,7 +210,7 @@ As a safeguard, uploaded-certs will be deleted in two hours; If necessary, you c
 
 Then you can join any number of worker nodes by running the following on each as root:
 
-kubeadm join payserv-lb-poc:6443 --token qm8e6s.fg21m2eijz2yuybi \
+kubeadm join lb-master:6443 --token qm8e6s.fg21m2eijz2yuybi \
         --discovery-token-ca-cert-hash sha256:06ff052ecf66ff5953793daa7625e1ae59352528e2ca72813d4e4e724234a7ea
 ```
 # add kubeconfig admin 
@@ -219,6 +219,7 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
+check node by *kubectl get node*
 
 
 
