@@ -3,23 +3,16 @@ How to instal kubernetes multimaster Ubuntu 20.04 LTS
 
 ## ARCHITECTURE (TOPOLOGI)
 
-| Node        | Ip            | Description                                |
-| :--------   | :-------      | :----------------------------------------- |
-| `LB-Master` | `10.10.90.51` | Load balance for kube api-server port 6443 |
-| `Master-01` | `10.10.90.52` | Controle plane                             |
-| `Master-02` | `10.10.90.53` | Controle plane                             |
-| `Master-03` | `10.10.90.54` | Controle plane                             |
-| `Worker-01` | `10.10.90.55` | Worker                                     |
-| `Worker-02` | `10.10.90.56` | Worker                                     |
-| `Worker-03` | `10.10.90.57` | Worker                                     |
-
 ![Alt text](image.png)
 
+# Do in all Node
 
 ## Login to root
+```bash
 - sudo -i
+```
 
-## set preverse Hostname
+## set preverse Hostname (Change Hostname VM)
 **preserve_hostname** adalah opsi atau pengaturan yang digunakan dalam konfigurasi beberapa distribusi Linux, terutama dalam file konfigurasi **/etc/cloud/cloud.cfg**. Pengaturan ini dapat memiliki nilai true atau false dan mempengaruhi cara hostname sistem dihandle selama proses boot atau provisioning.
 
 Ketika **preserve_hostname** diatur sebagai true, itu berarti sistem akan mempertahankan hostname yang sudah ditetapkan secara manual atau yang diberikan selama proses konfigurasi. Dengan kata lain, meskipun ada konfigurasi atau otomatisasi yang mencoba mengubah hostname selama proses boot, sistem akan mempertahankan nilai hostname yang sudah ada.
@@ -31,6 +24,16 @@ Jika preserve_hostname diatur sebagai false, maka sistem dapat mengganti hostnam
 
 ## Setup Hostname 
 - hostnamectl set-hostname {hostname}
+
+| Hostname       | Ip            | Description                                |
+| :--------   | :-------      | :----------------------------------------- |
+| `Lb-master` | `10.10.90.51` | Load balance for kube api-server port 6443 |
+| `master-01` | `10.10.90.52` | Controle plane                             |
+| `master-02` | `10.10.90.53` | Controle plane                             |
+| `master-03` | `10.10.90.54` | Controle plane                             |
+| `worker-01` | `10.10.90.55` | Worker                                     |
+| `worker-02` | `10.10.90.56` | Worker                                     |
+| `worker-03` | `10.10.90.57` | Worker                                     |
 
 ## logout and login again
 - exit
