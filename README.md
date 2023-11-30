@@ -1,7 +1,7 @@
-# INSTALLATION KUBERNETES MULTIMASTER
-How to instal kubernetes multimaster Ubuntu 20.04 LTS
+# INSTALASI KUBERNETES MULTI MASTER
+instal kubernetes multimaster Ubuntu 20.04 LTS
 
-## ARCHITECTURE (TOPOLOGI)
+## ARSITEKTUR (TOPOLOGI)
 
 ![Alt text](image.png)
 
@@ -12,7 +12,7 @@ How to instal kubernetes multimaster Ubuntu 20.04 LTS
  sudo -i
 ```
 
-## set preverse Hostname (Change Hostname VM)
+## set preverse hostname (Change Hostname VM)
 **preserve_hostname** adalah opsi atau pengaturan yang digunakan dalam konfigurasi beberapa distribusi Linux, terutama dalam file konfigurasi **/etc/cloud/cloud.cfg**. Pengaturan ini dapat memiliki nilai true atau false dan mempengaruhi cara hostname sistem dihandle selama proses boot atau provisioning.
 
 Ketika **preserve_hostname** diatur sebagai true, itu berarti sistem akan mempertahankan hostname yang sudah ditetapkan secara manual atau yang diberikan selama proses konfigurasi. Dengan kata lain, meskipun ada konfigurasi atau otomatisasi yang mencoba mengubah hostname selama proses boot, sistem akan mempertahankan nilai hostname yang sudah ada.
@@ -27,9 +27,9 @@ preserve_hostname : true
 ```bash
 hostnamectl set-hostname {hostname}
 ```
-| Hostname       | Ip            | Description                                |
+| Hostname    | Ip            | Description                                |
 | :--------   | :-------      | :----------------------------------------- |
-| `Lb-master` | `10.10.90.51` | Load balance for kube api-server port 6443 |
+| `lb-master` | `10.10.90.51` | Load balance for kube api-server port 6443 |
 | `master-01` | `10.10.90.52` | Controle plane                             |
 | `master-02` | `10.10.90.53` | Controle plane                             |
 | `master-03` | `10.10.90.54` | Controle plane                             |
@@ -37,19 +37,21 @@ hostnamectl set-hostname {hostname}
 | `worker-02` | `10.10.90.56` | Worker                                     |
 | `worker-03` | `10.10.90.57` | Worker                                     |
 
-## logout and login again
-- exit
-- ssh 
-
 ## Set time
-- timedatectl set-timezone Asia/Jakarta
-
+```bash
+timedatectl set-timezone Asia/Jakarta
+```
 ## set Domain Local
-- nano /etc/hosts/<br/>
-  10.1.x.x {hostname-local}<br/>
-  10.1.x.x {hostname-local}<br/>
-  10.1.x.x {hostname-local}<br/>
-  10.1.x.x {hostname-local}<br/>
+```bash
+nano /etc/hosts
+```
+  10.10.90.51 lb-master<br/>
+  10.10.90.52 master-01<br/>
+  10.10.90.53 master-02<br/>
+  10.10.90.54 master-03<br/>
+  10.10.90.52 worker-01<br/>
+  10.10.90.53 worker-02<br/>
+  10.10.90.54 worker-03<br/>
 
 ## update repository
 - apt update
