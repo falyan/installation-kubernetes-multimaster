@@ -82,7 +82,7 @@ apt-mark hold kubelet kubeadm kubectl
 ```bash
 nano /etc/fstab
 ``` 
-comment swap.img
+- comment swap.img
 
 ```bash
 # /etc/fstab: static file system information.
@@ -100,22 +100,27 @@ comment swap.img
 
 ## set off swap
 ```
-- swapoff -a 
-- mount -a
-
+## set swapoff
+```bash
+swapoff -a 
+mount -a
+```
   
 ## set layer file system
-- modprobe overlay
-
+```bash
+modprobe overlay
+```
 ## set network bridge
-- modprobe br_netfilter
-
+```bash
+modprobe br_netfilter
+```
 ## set config layer file system
-- tee /etc/modules-load.d/k8s.conf <<EOF<br/>
-  overlay<br/>
-  br_netfilter<br/>
-  EOF
-
+```bash
+tee /etc/modules-load.d/k8s.conf <<EOF<br/>
+overlay<br/>
+br_netfilter<br/>
+EOF
+```
 ## set config bridge network k8s
 - tee /etc/sysctl.d/kubernetes.conf<<EOF<br/>
   net.bridge.bridge-nf-call-ip6tables = 1<br/>
