@@ -38,14 +38,15 @@ timedatectl set-timezone Asia/Jakarta
 ## set Domain Local (do all node)
 ```bash
 nano /etc/hosts
+
+  10.10.90.51 lb-master
+  10.10.90.52 master-01
+  10.10.90.53 master-02
+  10.10.90.54 master-03
+  10.10.90.55 worker-01
+  10.10.90.56 worker-02
+  10.10.90.57 worker-03
 ```
-  10.10.90.51 lb-master<br/>
-  10.10.90.52 master-01<br/>
-  10.10.90.53 master-02<br/>
-  10.10.90.54 master-03<br/>
-  10.10.90.55 worker-01<br/>
-  10.10.90.56 worker-02<br/>
-  10.10.90.57 worker-03<br/>
 
 # K8s Installation (Do all Master and worker)
 
