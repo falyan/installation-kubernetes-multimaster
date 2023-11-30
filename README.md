@@ -83,8 +83,8 @@ apt-mark hold kubelet kubeadm kubectl
 nano /etc/fstab
 ``` 
 comment swap.img
- 
-````bash
+
+```bash
 # /etc/fstab: static file system information.
 #
 # Use 'blkid' to print the universally unique identifier for a
