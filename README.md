@@ -221,7 +221,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 check node by *kubectl get node*
 
-# INITIAL ANOTHER MASTER (do in master-02 and master-03)
+# INITIAL ANOTHER MASTER OR JOINING ANOTHER MASTER (do in master-02 and master-03)
 ## pull kubernetes image
 ```bash
 kubeadm config images pull
@@ -230,7 +230,7 @@ kubeadm config images pull
 ```bash
 kubeadm init phase preflight
 ```
-## Init MultiMaster
+## Init Multimaster (do in master-02 and master-03)
 ```bash
 kubeadm join lb-master:6443 --token qm8e6s.fg21m2eijz2yuybi \
         --discovery-token-ca-cert-hash sha256:06ff052ecf66ff5953793daa7625e1ae59352528e2ca72813d4e4e724234a7ea \
@@ -241,6 +241,14 @@ kubeadm join lb-master:6443 --token qm8e6s.fg21m2eijz2yuybi \
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+# JOIN WORKER TO MASTER (DO IN ALL WORKER)
+## join worker
+```bash
+kubeadm join lb-master:6443 --token qm8e6s.fg21m2eijz2yuybi \
+        --discovery-token-ca-cert-hash sha256:06ff052ecf66ff5953793daa7625e1ae59352528e2ca72813d4e4e724234a7ea
+```
 
 
 
