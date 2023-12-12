@@ -49,7 +49,7 @@ nano /etc/hosts
   10.10.90.57 worker-03
 ```
 
-## install and set up haproxy for master
+## install and set up haproxy for kube api master
 
 - Install HAproxy
 ```bash
