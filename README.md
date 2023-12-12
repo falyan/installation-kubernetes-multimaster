@@ -144,8 +144,8 @@ apt install -y kubeadm=1.25.0-00 kubelet=1.25.0-00 kubectl=1.25.0-00
 ```bash
 apt-mark hold kubelet kubeadm kubectl
 ```
-### System linux configuration ###
-## comment swap in fstab
+## System linux configuration ###
+### comment swap in fstab
 ```bash
 nano /etc/fstab
 ``` 
