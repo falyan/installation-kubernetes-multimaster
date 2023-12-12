@@ -97,6 +97,21 @@ backend apiserver
         server master-03 master-03:6443 check
 
 ```
+- makesure your configuration is valid check with command bellow
+
+```bash
+haproxy -f /etc/haproxy/haproxy.cfg -c
+```
+- if valid restart your haproxy service
+```bash
+systemctl restart haproxy 
+systemctl status haproxy
+```
+- maksure your port 6443 is open, verification with command bellow
+```bash
+nc -vvvv lb-cluster 6443
+```
+
 
 # K8S INSTALLATION (DO ALL MASTER AND WORKER)
 
