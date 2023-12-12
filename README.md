@@ -49,6 +49,55 @@ nano /etc/hosts
   10.10.90.57 worker-03
 ```
 
+## install and set up haproxy for master
+
+- Install HAproxy
+```bash
+apt update
+apt-get install haproxy -y
+```
+- Configurasi for HAproxy
+
+```bash
+vim /etc/haproxy/haproxy.cfg
+```
+change and add your configuration like bellow
+
+```bash
+listen stats
+  bind    lb-cluster:9000
+  mode    http
+  stats   enable
+  stats   hide-version
+  stats   uri       /stats
+  stats   refresh   30s
+  stats   realm     Haproxy\ Statistics
+  stats   auth      Admin:Password
+
+#---------------------------------------------------------------------
+# apiserver frontend which proxys to the control plane nodes
+#---------------------------------------------------------------------
+frontend apiserver
+    bind lb-cluster:6443
+    mode tcp
+    option tcplog
+    default_backend apiserver
+
+#---------------------------------------------------------------------
+# round robin balancing for apiserver
+#---------------------------------------------------------------------
+backend apiserver
+    option httpchk GET /healthz
+    http-check expect status 200
+    mode tcp
+    option ssl-hello-chk
+    balance     roundrobin
+        server master-01 master-01:6443 check
+        server master-02 master-02:6443 check
+        server master-03 master-03:6443 check
+
+```
+
 # K8S INSTALLATION (DO ALL MASTER AND WORKER)
 
 ## update repository
