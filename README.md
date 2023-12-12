@@ -10,7 +10,7 @@ install kubernetes multimaster Ubuntu 20.04 LTS
 ```bash
 hostnamectl set-hostname {hostname}
 ```
-| HOSTNAME    | IP            | KETERANGAN                               |
+| HOSTNAME    | IP            | KETERANGAN                                 |
 | :--------   | :-------      | :----------------------------------------- |
 | `lb-master` | `10.10.90.51` | Load balance for kube api-server port 6443 |
 | `master-01` | `10.10.90.52` | Controle plane                             |
