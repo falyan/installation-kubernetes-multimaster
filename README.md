@@ -125,10 +125,8 @@ apt install curl apt-transport-https -y
 ```
 ## add api-key official k8s from google
 ```bash
-curl -fsSL  https://packages.cloud.google.com/apt/doc/apt-key.gpg|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/k8s.gpg
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+mkdir -p /etc/apt/keyrings/
 
-update(terbaru)
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 
 ```
@@ -140,7 +138,7 @@ echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 ```bash
 apt update
 ```
-## instal kubectl kubeadm kubelet spceific version (v1.25)
+## install kubectl kubeadm kubelet spceific version (v1.25)
 ```bash
 apt install -y kubeadm=1.28.1-1.1 kubelet=1.28.1-1.1 kubectl=1.28.1-1.1 
 ```
